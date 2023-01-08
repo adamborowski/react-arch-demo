@@ -14,7 +14,7 @@ export const createGraphqlSearchClient = <
   token: string,
   adapter: Adapter<ServerType, ClientType, ServerPayloadType>
 ): SearchClient<ClientType, CursorType> => ({
-  search: async (query, abortController, cursor) => {
+  search: async (query, abortController) => {
     const gql = {
       // TODO inject specific query from external
       query: `query ($query: String!) {
@@ -24,7 +24,11 @@ export const createGraphqlSearchClient = <
       ... on Repository {
         databaseId
         name
+        owner {
+          login
+        }
         url
+        description
         stargazerCount
         forkCount
       }

@@ -4,10 +4,12 @@ import { Repository } from "../../types";
 
 const searchRepositorySchema = z.object({
   id: z.number(),
-  full_name: z.string(),
+  name: z.string(),
+  owner: z.object({ login: z.string() }),
   url: z.string(),
   stargazers_count: z.number(),
   forks_count: z.number(),
+  description: z.string().nullable(),
 });
 
 const searchPayloadSchema = z.object({
@@ -22,12 +24,22 @@ export const repositoryAdapter: Adapter<
   parse: searchPayloadSchema.parse,
   serverToClient: (serverResponse) =>
     serverResponse.items.map(
-      ({ url, full_name, stargazers_count, forks_count, id }) => ({
+      ({
+        url,
+        name,
+        stargazers_count,
+        forks_count,
         id,
-        name: full_name,
+        owner,
+        description,
+      }) => ({
+        id,
+        name,
+        owner: owner.login,
         linkUrl: url,
         numForks: forks_count,
         numStars: stargazers_count,
+        description,
       })
     ),
 };

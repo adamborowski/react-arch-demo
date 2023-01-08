@@ -6,8 +6,10 @@ const searchRepositorySchema = z.object({
   databaseId: z.number(),
   name: z.string(),
   url: z.string(),
+  owner: z.object({ login: z.string() }),
   stargazerCount: z.number(),
   forkCount: z.number(),
+  description: z.string().nullable(),
 });
 
 const searchPayloadSchema = z.object({
@@ -26,12 +28,22 @@ export const repositoryAdapter: Adapter<
   parse: searchPayloadSchema.parse,
   serverToClient: (serverResponse) =>
     serverResponse.data.search.nodes.map(
-      ({ url, name, stargazerCount, forkCount, databaseId }) => ({
+      ({
+        url,
+        name,
+        stargazerCount,
+        forkCount,
+        databaseId,
+        owner,
+        description,
+      }) => ({
         id: databaseId,
         name,
+        owner: owner.login,
         linkUrl: url,
         numForks: forkCount,
         numStars: stargazerCount,
+        description,
       })
     ),
 };

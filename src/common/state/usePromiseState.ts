@@ -5,6 +5,8 @@ export type PromiseState<DataType> =
   | { type: "loaded"; data: DataType }
   | { type: "error"; message: string };
 
+export type PromiseStateType = PromiseState<unknown>["type"];
+
 export const usePromiseState = <DataType>(
   promise: Promise<DataType>
 ): PromiseState<DataType> => {

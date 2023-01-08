@@ -3,7 +3,8 @@ import { Repository } from "../types";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { SearchClient } from "../../../common/api/clients/SearchClient";
 
-export const useSearchRepositories = (
+export const useSearchRepositoriesClient = (
+  // TODO abstract from Repository[]
   state: PromiseState<Repository[]>,
   onStateChange: Dispatch<SetStateAction<PromiseState<Repository[]>>>,
   client: SearchClient<Repository, number>,
