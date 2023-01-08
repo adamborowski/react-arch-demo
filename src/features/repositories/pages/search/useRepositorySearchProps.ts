@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PromiseState } from "../../../../common/state/usePromiseState";
 import { Repository } from "../../types";
 import { useSearchRepositoriesClient } from "../../services/useSearchRepositoriesClient";
@@ -12,16 +12,23 @@ export const useRepositorySearchProps = (
     type: "pending",
   });
 
-  useSearchRepositoriesClient(
+  const searchRepositories = useSearchRepositoriesClient(
     repositories,
     setRepositories,
-    searchClient,
-    query
+    searchClient
   );
+
+  useEffect(() => {
+    void searchRepositories.search(query);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     query,
     repositories,
-    onQueryChange: setQuery,
+    onQueryChange: (query: string) => {
+      setQuery(query);
+      void searchRepositories.search(query);
+    },
   };
 };
