@@ -1,3 +1,5 @@
+import {ChakraProvider} from '@chakra-ui/react';
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -6,4 +8,15 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+  layout: "fullscreen",
+};
+
+const withChakraProvider = (Story) => {
+  return (
+    <ChakraProvider>
+      <Story />
+    </ChakraProvider>
+  );
+};
+
+export const decorators = [withChakraProvider];
