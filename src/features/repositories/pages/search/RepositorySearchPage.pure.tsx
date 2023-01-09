@@ -29,7 +29,12 @@ export const RepositorySearchPagePure: FC<RepositorySearchPagePureProps> = ({
   >
     {repositories.type === "pending" && (
       <Center flex={1} height="100%">
-        <Spinner size="xl" emptyColor="gray.200" color="blue.500" />
+        <Spinner
+          data-testid="spinner"
+          size="xl"
+          emptyColor="gray.200"
+          color="blue.500"
+        />
       </Center>
     )}
     {repositories.type === "error" && (
