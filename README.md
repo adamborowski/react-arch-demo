@@ -2,6 +2,16 @@
 
 ## Verifications
 
+
+### Local development.
+
+First, copy `.env` to `.env.local` file and provide your GitHub developer token.
+
+Then you can start with 
+```shell
+npm start
+```
+
 ### Build & lint
 
 In order to check typescript or eslint error, run the following command:
