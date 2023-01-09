@@ -12,7 +12,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
 import { FormattedMessage, useIntl } from "react-intl";
 import { messages } from "../../../i18n/messages";
 
