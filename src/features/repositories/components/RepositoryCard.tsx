@@ -42,9 +42,9 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
             gap="1"
             title={formatMessage(messages.statsTooltip)}
           >
-            <StarIcon boxSize="4" />
+            🌟
             {repository.numStars}
-            <ArrowUpIcon boxSize="4" />
+            🍴
             {repository.numForks}
           </Text>
         </Stack>
