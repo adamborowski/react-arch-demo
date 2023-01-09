@@ -15,4 +15,7 @@ module.exports = {
       disable: true,
     },
   },
+  features: {
+    interactionsDebugger: true, // 👈 Enable playback controls
+  },
 };
