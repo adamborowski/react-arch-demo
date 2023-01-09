@@ -5,7 +5,11 @@ import { Repository } from "../../types";
 import { repositorySearchClient } from "./repositorySearchClient";
 import { ComponentStory } from "@storybook/react";
 
-export default {};
+export default {
+  parameters: {
+    chromatic: { disable: true },
+  },
+};
 
 const Template: ComponentStory<FC<{ query: string }>> = ({ query }) => {
   const [state, setState] = useState<PromiseState<Repository[]>>({
