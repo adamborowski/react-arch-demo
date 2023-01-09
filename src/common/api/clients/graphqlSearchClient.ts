@@ -18,7 +18,7 @@ export const createGraphqlSearchClient = <
     const gql = {
       // TODO inject specific query from external
       query: `query ($query: String!) {
-  search(query: $query, type: REPOSITORY, first: 10) {
+  search(query: $query, type: REPOSITORY, first: 50) {
     repositoryCount
     nodes {
       ... on Repository {
