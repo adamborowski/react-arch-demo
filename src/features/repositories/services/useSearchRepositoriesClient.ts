@@ -15,7 +15,7 @@ export const useSearchRepositoriesClient = (
   // TODO abstract from Repository[]
   state: PromiseState<Repository[]>,
   onStateChange: Dispatch<SetStateAction<PromiseState<Repository[]>>>,
-  client: SearchClient<Repository, number>
+  client: SearchClient<Repository>
 ) => {
   const lastPromise = useRef<CancelablePromise | null>(null);
 
@@ -27,10 +27,10 @@ export const useSearchRepositoriesClient = (
         const abortController = new AbortController();
         lastPromise.current = cancelableWithAbortController(
           abortController,
-          client.search(query, abortController, 0)
+          client.search(query, abortController)
         );
 
-        const fetchedResult = await lastPromise.current; //todo cursors!
+        const fetchedResult = await lastPromise.current;
         onStateChange({ type: "loaded", data: fetchedResult });
       } catch (e) {
         if (e instanceof DOMException && e.name === "AbortError") {

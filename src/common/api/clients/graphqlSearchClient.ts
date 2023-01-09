@@ -1,19 +1,16 @@
+// istanbul ignore file
+
 import { SearchClient } from "./SearchClient";
 import { Adapter } from "./Adapter";
 import { ZodError } from "zod";
 
 // todo make abstract to satisfy any graphql query in the future
 // for now make it search specific
-export const createGraphqlSearchClient = <
-  ServerType,
-  ClientType,
-  ServerPayloadType,
-  CursorType
->(
+export const createGraphqlSearchClient = <ServerType, ClientType>(
   base: string,
   token: string,
-  adapter: Adapter<ServerType, ClientType, ServerPayloadType>
-): SearchClient<ClientType, CursorType> => ({
+  adapter: Adapter<ServerType, ClientType>
+): SearchClient<ClientType> => ({
   search: async (query, abortController) => {
     const gql = {
       // TODO inject specific query from external
@@ -57,6 +54,7 @@ export const createGraphqlSearchClient = <
       return adapter.serverToClient(serverResponse);
     } catch (e) {
       if (e instanceof ZodError) {
+        // FIXME this might be specific to adapter not client
         throw new Error(
           e.issues.map((i) => `${i.path}: ${i.message}`).join("\n")
         );

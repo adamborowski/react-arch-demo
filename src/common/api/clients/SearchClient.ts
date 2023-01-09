@@ -1,7 +1,6 @@
-export interface SearchClient<Entity, CursorType> {
+export interface SearchClient<Entity> {
   search: (
     query: string,
-    abortController?: AbortController,
-    beforeCursor?: CursorType
+    abortController?: AbortController
   ) => Promise<Entity[]>;
 }

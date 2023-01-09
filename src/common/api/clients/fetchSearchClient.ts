@@ -2,18 +2,14 @@ import { SearchClient } from "./SearchClient";
 import { Adapter } from "./Adapter";
 import { ZodError } from "zod";
 
-export const createFetchSearchClient = <
-  ServerType,
-  ClientType,
-  ServerPayloadType,
-  CursorType
->(
-  urlFactory: (query: string, cursor?: CursorType) => string,
+export const createFetchSearchClient = <ServerType, ClientType>(
+  urlFactory: (query: string) => string,
   token: string,
-  adapter: Adapter<ServerType, ClientType, ServerPayloadType>
-): SearchClient<ClientType, CursorType> => ({
-  search: async (query, abortController, cursor) => {
-    const response = await fetch(urlFactory(query, cursor), {
+  adapter: Adapter<ServerType, ClientType>,
+  fetchImpl: typeof fetch = fetch
+): SearchClient<ClientType> => ({
+  search: async (query, abortController) => {
+    const response = await fetchImpl(urlFactory(query), {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,

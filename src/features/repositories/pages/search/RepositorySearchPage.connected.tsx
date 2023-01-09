@@ -5,7 +5,7 @@ import { RepositorySearchPagePure } from "./RepositorySearchPage.pure";
 import { useRepositorySearchProps } from "./useRepositorySearchProps";
 
 export interface RepositorySearchPageConnectedProps {
-  searchClient: SearchClient<Repository, unknown>;
+  searchClient: SearchClient<Repository>;
 }
 
 export const RepositorySearchPageConnected: FC<RepositorySearchPageConnectedProps> =

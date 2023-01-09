@@ -5,7 +5,7 @@ import { useSearchRepositoriesClient } from "../../services/useSearchRepositorie
 import { SearchClient } from "../../../../common/api/clients/SearchClient";
 
 export const useRepositorySearchProps = (
-  searchClient: SearchClient<Repository, unknown>
+  searchClient: SearchClient<Repository>
 ) => {
   const [query, setQuery] = useState("react");
   const [repositories, setRepositories] = useState<PromiseState<Repository[]>>({
