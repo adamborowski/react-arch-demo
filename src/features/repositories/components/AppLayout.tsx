@@ -1,6 +1,8 @@
 import { FC, PropsWithChildren } from "react";
 import { Flex, Heading, Stack } from "@chakra-ui/react";
 import { ColorModeChange } from "./ColorModeChange";
+import { FormattedMessage } from "react-intl";
+import { messages } from "../../../i18n/messages";
 
 export const AppLayout: FC<PropsWithChildren> = ({ children, ...rest }) => (
   <Stack minHeight="100vh" spacing={0} {...rest}>
@@ -11,7 +13,7 @@ export const AppLayout: FC<PropsWithChildren> = ({ children, ...rest }) => (
       background="chakra-subtle-bg"
     >
       <Heading flex={1} size="md">
-        Repositories Search Demo
+        <FormattedMessage {...messages.appTitle} />
       </Heading>
       <ColorModeChange />
     </Flex>

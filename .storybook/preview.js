@@ -1,5 +1,6 @@
 import { ChakraProvider, useColorMode } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { IntlProvider } from "react-intl";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -32,7 +33,13 @@ const withChakraProvider = (Story, context) => (
   </ChakraProvider>
 );
 
-export const decorators = [withChakraProvider];
+const intlProvider = (Story) => (
+  <IntlProvider locale="en-US">
+    <Story />
+  </IntlProvider>
+);
+
+export const decorators = [withChakraProvider, intlProvider];
 
 export const globalTypes = {
   theme: {

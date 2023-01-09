@@ -1,6 +1,8 @@
 import React, { FC, FormEvent, useLayoutEffect, useState } from "react";
 import { Button, Flex, Input, useColorModeValue } from "@chakra-ui/react";
 import { PromiseStateType } from "../../../common/state/usePromiseState";
+import { FormattedMessage } from "react-intl";
+import { messages } from "../../../i18n/messages";
 
 export interface SearchBoxProps {
   query: string;
@@ -60,7 +62,7 @@ export const SearchBox: FC<SearchBoxProps> = ({
           colorScheme="blue"
           disabled={!isSearchAvailable}
         >
-          Search
+          <FormattedMessage {...messages.searchButtonLabel} />
         </Button>
       </Flex>
     </form>
