@@ -3,6 +3,6 @@ import { createGraphqlSearchClient } from "../../../../common/api/clients/graphq
 
 export const repositorySearchClient = createGraphqlSearchClient(
   "https://api.github.com/graphql",
-  "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",
+  process.env.REACT_APP_GITHUB_TOKEN!,
   repositoryAdapter
 );

@@ -9,6 +9,9 @@ import { withFailure } from "../../../../common/api/clients/development/withFail
 import { withLoading } from "../../../../common/api/clients/development/withLoading";
 import { Repository } from "../../types";
 import { inMemorySearchClient } from "./__test__/test-common";
+import { screen, userEvent, waitFor } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { delay } from "../../../../common/utils/delay";
 
 export default {
   component: RepositorySearchPageConnected,
@@ -21,6 +24,56 @@ export const ClientInMemoryMock: ComponentStory<
 
   return <RepositorySearchPageConnected searchClient={client} />;
 };
+
+ClientInMemoryMock.play = async ({ canvasElement }) => {
+  expect(screen.getByTestId("spinner")).toBeVisible();
+  await waitFor(
+      async () => {
+        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
+  );
+  expect(screen.getAllByTestId("repository-card")).toHaveLength(4);
+
+  // change query to "angular" and search
+  await userEvent.click(screen.getByDisplayValue("react"));
+  await userEvent.keyboard("{selectall}12", { delay: 100 });
+  await delay(300);
+  await userEvent.click(screen.getByText("Search"));
+
+  // now search button should be disabled and we should wait for results
+  expect(screen.getByText("Search")).toBeDisabled();
+  expect(screen.getByTestId("spinner")).toBeVisible();
+
+  await waitFor(
+      async () => {
+        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
+  );
+
+  // we should see only two repositories in results
+  expect(screen.getAllByTestId("repository-card")).toHaveLength(2);
+
+  // change query to "reactandangularforevertogether" and search
+  await userEvent.click(screen.getByDisplayValue("12"));
+  await userEvent.keyboard("{selectall}reactandangularforevertogether", {
+    delay: 100,
+  });
+  await delay(300);
+  await userEvent.click(screen.getByText("Search"));
+
+  await waitFor(
+      async () => {
+        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
+  );
+
+  expect(screen.queryAllByTestId("repository-card")).toHaveLength(0);
+  expect(screen.getByText("No repositories found")).toBeVisible();
+};
+
 
 export const ClientRest: ComponentStory<typeof RepositorySearchPageConnected> =
   () => <RepositorySearchPageConnected searchClient={restClient} />;

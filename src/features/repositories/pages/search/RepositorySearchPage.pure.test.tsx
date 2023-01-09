@@ -79,7 +79,7 @@ describe("RepositorySearchPage.pure", () => {
     expect(firstCardView.getByText("first repo")).toBeVisible();
     expect(firstCardView.getByText(/Primo/)).toBeVisible();
     expect(firstCardView.getByTitle("Stars and forks")).toHaveTextContent(
-      "10100"
+      "🌟10🍴100"
     );
 
     const secondCardView = within(cardViews[1]);
@@ -87,7 +87,7 @@ describe("RepositorySearchPage.pure", () => {
     expect(secondCardView.getByText("second repo")).toBeVisible();
     expect(secondCardView.getByText(/Secondo/)).toBeVisible();
     expect(secondCardView.getByTitle("Stars and forks")).toHaveTextContent(
-      "20200"
+      "🌟20🍴200"
     );
   });
 
@@ -149,5 +149,4 @@ describe("RepositorySearchPage.pure", () => {
     userEvent.click(screen.getByText("Search")); // click anyway
     expect(onSubmitMock).not.toBeCalled();
   });
-
 });

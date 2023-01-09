@@ -12,7 +12,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
 import { FormattedMessage, useIntl } from "react-intl";
 import { messages } from "../../../i18n/messages";
 
@@ -29,7 +28,7 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
   return (
     <Card {...rest} data-testid="repository-card">
       <CardBody>
-        <Stack mt="6" spacing="3">
+        <Stack mt="6" spacing="3" data-chromatic="ignore">
           <Heading size="md">
             {repository.owner} &raquo; {repository.name}
           </Heading>
@@ -42,9 +41,9 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
             gap="1"
             title={formatMessage(messages.statsTooltip)}
           >
-            <StarIcon boxSize="4" />
+            🌟
             {repository.numStars}
-            <ArrowUpIcon boxSize="4" />
+            🍴
             {repository.numForks}
           </Text>
         </Stack>
