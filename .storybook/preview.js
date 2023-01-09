@@ -34,7 +34,7 @@ const withChakraProvider = (Story, context) => (
 );
 
 const intlProvider = (Story) => (
-  <IntlProvider locale="en-US">
+  <IntlProvider locale="en">
     <Story />
   </IntlProvider>
 );
