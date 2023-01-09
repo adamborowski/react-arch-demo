@@ -28,13 +28,12 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
   return (
     <Card {...rest} data-testid="repository-card">
       <CardBody>
-        <Stack mt="6" spacing="3">
+        <Stack mt="6" spacing="3" data-chromatic="ignore">
           <Heading size="md">
             {repository.owner} &raquo; {repository.name}
           </Heading>
           <Text>{repository.description ?? <em>(no description)</em>}</Text>
           <Text
-            data-chromatic="ignore"
             color="blue.200"
             fontSize="2xl"
             display="flex"
