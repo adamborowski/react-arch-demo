@@ -1,4 +1,5 @@
-import {ChakraProvider} from '@chakra-ui/react';
+import { ChakraProvider, useColorMode } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -11,12 +12,41 @@ export const parameters = {
   layout: "fullscreen",
 };
 
-const withChakraProvider = (Story) => {
-  return (
-    <ChakraProvider>
-      <Story />
-    </ChakraProvider>
-  );
+//https://github.com/chakra-ui/chakra-ui/issues/6855
+
+const ColorMode = ({ colorMode, children }) => {
+  const { setColorMode } = useColorMode();
+
+  useEffect(() => {
+    setColorMode(colorMode);
+  }, [colorMode]);
+
+  return children;
 };
 
+const withChakraProvider = (Story, context) => (
+  <ChakraProvider>
+    <ColorMode colorMode={context.globals.theme}>
+      <Story />
+    </ColorMode>
+  </ChakraProvider>
+);
+
 export const decorators = [withChakraProvider];
+
+export const globalTypes = {
+  theme: {
+    name: "Theme",
+    description: "Global theme for components",
+    defaultValue: "light",
+    toolbar: {
+      icon: "circlehollow",
+      // Array of plain string values or MenuItem shape (see below)
+      items: ["light", "dark"],
+      // Property that specifies if the name of the item will be displayed
+      showName: true,
+      // Change title based on selected value
+      dynamicTitle: true,
+    },
+  },
+};

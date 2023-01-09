@@ -1,25 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { repositorySearchClient as graphqlClient } from "./features/repositories/api/github-graphql/repositorySearchClient";
+import { RepositorySearchPageConnected } from "./features/repositories/pages/search/RepositorySearchPage.connected";
+import { AppLayout } from "./features/repositories/components/AppLayout";
+import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <ColorModeProvider>
+        <AppLayout>
+          <RepositorySearchPageConnected searchClient={graphqlClient} />
+        </AppLayout>
+      </ColorModeProvider>
+    </ChakraProvider>
   );
 }
 
