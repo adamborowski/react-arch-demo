@@ -25,26 +25,19 @@ export const ClientInMemoryMock: ComponentStory<
   return <RepositorySearchPageConnected searchClient={client} />;
 };
 
-export const ClientRest: ComponentStory<typeof RepositorySearchPageConnected> =
-  () => <RepositorySearchPageConnected searchClient={restClient} />;
-
-export const ClientGraphql: ComponentStory<
-  typeof RepositorySearchPageConnected
-> = () => <RepositorySearchPageConnected searchClient={graphqlClient} />;
-
-ClientGraphql.play = async ({ canvasElement }) => {
+ClientInMemoryMock.play = async ({ canvasElement }) => {
   expect(screen.getByTestId("spinner")).toBeVisible();
   await waitFor(
-    async () => {
-      await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
-    },
-    { timeout: 10000 }
+      async () => {
+        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
   );
-  expect(screen.getAllByTestId("repository-card")).toHaveLength(50);
+  expect(screen.getAllByTestId("repository-card")).toHaveLength(4);
 
   // change query to "angular" and search
   await userEvent.click(screen.getByDisplayValue("react"));
-  await userEvent.keyboard("{selectall}angular", { delay: 100 });
+  await userEvent.keyboard("{selectall}12", { delay: 100 });
   await delay(300);
   await userEvent.click(screen.getByText("Search"));
 
@@ -53,17 +46,17 @@ ClientGraphql.play = async ({ canvasElement }) => {
   expect(screen.getByTestId("spinner")).toBeVisible();
 
   await waitFor(
-    async () => {
-      await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
-    },
-    { timeout: 10000 }
+      async () => {
+        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
   );
 
   // we should see only two repositories in results
-  expect(screen.getAllByTestId("repository-card")).toHaveLength(50);
+  expect(screen.getAllByTestId("repository-card")).toHaveLength(2);
 
   // change query to "reactandangularforevertogether" and search
-  await userEvent.click(screen.getByDisplayValue("angular"));
+  await userEvent.click(screen.getByDisplayValue("12"));
   await userEvent.keyboard("{selectall}reactandangularforevertogether", {
     delay: 100,
   });
@@ -71,15 +64,23 @@ ClientGraphql.play = async ({ canvasElement }) => {
   await userEvent.click(screen.getByText("Search"));
 
   await waitFor(
-    async () => {
-      await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
-    },
-    { timeout: 10000 }
+      async () => {
+        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
   );
 
   expect(screen.queryAllByTestId("repository-card")).toHaveLength(0);
   expect(screen.getByText("No repositories found")).toBeVisible();
 };
+
+
+export const ClientRest: ComponentStory<typeof RepositorySearchPageConnected> =
+  () => <RepositorySearchPageConnected searchClient={restClient} />;
+
+export const ClientGraphql: ComponentStory<
+  typeof RepositorySearchPageConnected
+> = () => <RepositorySearchPageConnected searchClient={graphqlClient} />;
 
 export const ClientGraphqlDelayed: ComponentStory<
   typeof RepositorySearchPageConnected
