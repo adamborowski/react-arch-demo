@@ -1,6 +1,6 @@
 import { Adapter } from "../../../../common/api/clients/Adapter";
 import z from "zod";
-import { Repository } from "../../types";
+import { Repository, repositorySchema } from "../../types";
 
 const searchRepositorySchema = z.object({
   id: z.number(),
@@ -18,28 +18,20 @@ const searchPayloadSchema = z.object({
 
 export const repositoryAdapter: Adapter<
   z.infer<typeof searchPayloadSchema>,
-  Repository,
-  never
+  Repository
 > = {
   parse: searchPayloadSchema.parse,
   serverToClient: (serverResponse) =>
     serverResponse.items.map(
-      ({
-        url,
-        name,
-        stargazers_count,
-        forks_count,
-        id,
-        owner,
-        description,
-      }) => ({
-        id,
-        name,
-        owner: owner.login,
-        linkUrl: url,
-        numForks: forks_count,
-        numStars: stargazers_count,
-        description,
-      })
+      ({ url, name, stargazers_count, forks_count, id, owner, description }) =>
+        repositorySchema.parse({
+          id,
+          name,
+          owner: owner.login,
+          linkUrl: url,
+          numForks: forks_count,
+          numStars: stargazers_count,
+          description,
+        })
     ),
 };
