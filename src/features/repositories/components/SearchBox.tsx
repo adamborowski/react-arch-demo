@@ -1,5 +1,5 @@
 import React, { FC, FormEvent, useLayoutEffect, useState } from "react";
-import { Button, Flex, Input } from "@chakra-ui/react";
+import { Button, Flex, Input, useColorModeValue } from "@chakra-ui/react";
 import { PromiseStateType } from "../../../common/state/usePromiseState";
 
 export interface SearchBoxProps {
@@ -28,16 +28,24 @@ export const SearchBox: FC<SearchBoxProps> = ({
     isSearchAvailable && onSubmit(currentQuery);
   };
 
+  const bgColor = useColorModeValue(
+    "rgba(237, 242, 247, 0.9)",
+    "rgba(45, 55, 72, 0.9)"
+  );
+  const border = useColorModeValue(
+    "1px solid var(--chakra-colors-chakra-border-color)",
+    "1px solid var(--chakra-colors-chakra-body-bg)"
+  );
+
   return (
     <form onSubmit={handleSearch} {...rest}>
       <Flex
-        position="sticky"
-        top={0}
         padding={4}
         direction="row"
         gap={4}
         alignItems="start"
-        background="chakra-subtle-bg"
+        background={bgColor}
+        borderBottom={border}
       >
         <Input
           background="chakra-body-bg"
