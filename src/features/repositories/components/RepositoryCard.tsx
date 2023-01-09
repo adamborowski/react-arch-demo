@@ -27,7 +27,7 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
   const { formatMessage } = useIntl();
 
   return (
-    <Card {...rest}>
+    <Card {...rest} data-testid="repository-card">
       <CardBody>
         <Stack mt="6" spacing="3">
           <Heading size="md">
