@@ -75,5 +75,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      ".stories.tsx",
+      "__test__",
+      "__stories__"
+    ]
   }
 }
