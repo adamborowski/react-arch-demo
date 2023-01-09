@@ -9,7 +9,9 @@ export interface RepositorySearchPageLayoutProps {
 export const RepositorySearchPageLayout: FC<RepositorySearchPageLayoutProps> =
   ({ children, header }) => (
     <Flex flex={1} direction="column" alignItems="stretch">
-      <Box>{header}</Box>
+      <Box position="sticky" top={0} zIndex={1} backdropFilter="blur(3px)">
+        {header}
+      </Box>
       <Stack flex="1">{children}</Stack>
     </Flex>
   );
