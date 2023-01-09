@@ -34,6 +34,7 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
           </Heading>
           <Text>{repository.description ?? <em>(no description)</em>}</Text>
           <Text
+            data-chromatic="ignore"
             color="blue.200"
             fontSize="2xl"
             display="flex"
