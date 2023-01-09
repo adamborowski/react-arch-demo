@@ -1,5 +1,5 @@
 import { useSearchRepositoriesClient } from "../../services/useSearchRepositoriesClient";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { PromiseState } from "../../../../common/state/usePromiseState";
 import { Repository } from "../../types";
 import { repositorySearchClient } from "./repositorySearchClient";
@@ -11,7 +11,15 @@ const Template: ComponentStory<FC<{ query: string }>> = ({ query }) => {
   const [state, setState] = useState<PromiseState<Repository[]>>({
     type: "pending",
   });
-  useSearchRepositoriesClient(state, setState, repositorySearchClient, query);
+  const { search } = useSearchRepositoriesClient(
+    state,
+    setState,
+    repositorySearchClient
+  );
+
+  useEffect(() => {
+    void search(query);
+  }, [query, search]);
 
   return (
     <div>
