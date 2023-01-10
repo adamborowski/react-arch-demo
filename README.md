@@ -12,6 +12,8 @@ Then you can start with
 npm start
 ```
 
+The repository also has configured `commitlint` and prettier and eslint git hooks.
+
 ### Build & lint
 
 In order to check typescript or eslint error, run the following command:
@@ -33,6 +35,13 @@ You can access them from [GitHub Actions](https://github.com/adamborowski/react-
 and Pull Request check links or the [Invite link](https://www.chromatic.com/start?inviteToken=c1f1799677414c5ea8c88c4a7fe6e323&appId=63bc6c85068cfb74e4b8240d).
 
 See [Online Chromatic Storybook](https://www.chromatic.com/library?appId=63bc6c85068cfb74e4b8240d&branch=master).
+
+### GitHub Actions
+
+This repository contains following github actions run on master`s push and every PR to master branch.
+* [Storybook Deployment](https://github.com/adamborowski/react-arch-demo/actions/workflows/chromatic.yml)
+* [Build & Lint](https://github.com/adamborowski/react-arch-demo/actions/workflows/build.yml)
+* [Unit & integration tests](https://github.com/adamborowski/react-arch-demo/actions/workflows/test.yml)
 
 ### Component-Driven development
 
@@ -104,7 +113,7 @@ And in combination with storybook, we can have all popular use cases available t
 ## What's not included
 
 - Pagination is not implemented, it loads first 50 records.
-  - my existing virtual scroll with data fetching [example](https://adamborowski.github.io/imdb-hooks/movies) (search for "spider" and scroll) with [source](https://github.com/adamborowski/imdb-hooks/tree/master/src/aspects/list)
+  - my existing virtual scroll with data fetching [example](https://adamborowski.github.io/imdb-hooks) (search for "spider" and scroll) with [source](https://github.com/adamborowski/imdb-hooks/tree/master/src/aspects/list)
 - Not doing browser checking, prepared for newest Google Chrome
 - Routing - would use react-router but this time it would be small ROI for one page
 
