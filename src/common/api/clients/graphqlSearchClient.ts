@@ -6,7 +6,7 @@ import { ZodError } from "zod";
 
 // todo make abstract to satisfy any graphql query in the future
 // for now make it search specific
-// or: consider moving the entire client to feature folder
+// or - consider moving the entire client to feature folder
 export const createGraphqlSearchClient = <ServerType, ClientType>(
   base: string,
   token: string,
