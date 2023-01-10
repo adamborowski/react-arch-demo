@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { PromiseState } from "../../../../common/state/usePromiseState";
 import { Repository } from "../../types";
-import { useSearchRepositoriesClient } from "../../services/useSearchRepositoriesClient";
 import { SearchClient } from "../../../../common/api/clients/SearchClient";
+import { useSearchClient } from "../../../../common/services/useSearchClient";
 
 export const useRepositorySearchProps = (
   searchClient: SearchClient<Repository>
@@ -12,7 +12,7 @@ export const useRepositorySearchProps = (
     type: "pending",
   });
 
-  const searchRepositories = useSearchRepositoriesClient(
+  const searchRepositories = useSearchClient(
     repositories,
     setRepositories,
     searchClient

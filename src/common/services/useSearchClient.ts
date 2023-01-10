@@ -1,5 +1,4 @@
-import { PromiseState } from "../../../common/state/usePromiseState";
-import { Repository } from "../types";
+import { PromiseState } from "../state/usePromiseState";
 import {
   Dispatch,
   SetStateAction,
@@ -7,15 +6,15 @@ import {
   useEffect,
   useRef,
 } from "react";
-import { SearchClient } from "../../../common/api/clients/SearchClient";
+import { SearchClient } from "../api/clients/SearchClient";
 import CancelablePromise from "cancelable-promise";
-import { cancelableWithAbortController } from "../../../common/state/cancelablePromise";
+import { cancelableWithAbortController } from "../state/cancelablePromise";
 
-export const useSearchRepositoriesClient = (
+export const useSearchClient = <Entity>(
   // TODO abstract from Repository[]
-  state: PromiseState<Repository[]>,
-  onStateChange: Dispatch<SetStateAction<PromiseState<Repository[]>>>,
-  client: SearchClient<Repository>
+  state: PromiseState<Entity[]>,
+  onStateChange: Dispatch<SetStateAction<PromiseState<Entity[]>>>,
+  client: SearchClient<Entity>
 ) => {
   const lastPromise = useRef<CancelablePromise | null>(null);
 
