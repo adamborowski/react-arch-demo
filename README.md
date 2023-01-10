@@ -2,12 +2,12 @@
 
 ## Verifications
 
-
 ### Local development.
 
 First, copy `.env` to `.env.local` file and provide your GitHub developer token.
 
-Then you can start with 
+Then you can start with
+
 ```shell
 npm start
 ```
@@ -39,9 +39,10 @@ See [Online Chromatic Storybook](https://www.chromatic.com/library?appId=63bc6c8
 ### GitHub Actions
 
 This repository contains following github actions run on master`s push and every PR to master branch.
-* [Storybook Deployment](https://github.com/adamborowski/react-arch-demo/actions/workflows/chromatic.yml)
-* [Build & Lint](https://github.com/adamborowski/react-arch-demo/actions/workflows/build.yml)
-* [Unit & integration tests](https://github.com/adamborowski/react-arch-demo/actions/workflows/test.yml)
+
+- [Storybook Deployment](https://github.com/adamborowski/react-arch-demo/actions/workflows/chromatic.yml)
+- [Build & Lint](https://github.com/adamborowski/react-arch-demo/actions/workflows/build.yml)
+- [Unit & integration tests](https://github.com/adamborowski/react-arch-demo/actions/workflows/test.yml)
 
 ### Component-Driven development
 
@@ -93,8 +94,6 @@ In addition to that we can have higher order clients (`withFailing`, `withDelay`
 Thanks to that we don't need to mock or hack our code at all!
 And in combination with storybook, we can have all popular use cases available to reproduce in one menu.
 
-
-
 ## What's new to me
 
 - first time using Chakra UI, previous experience with:
@@ -109,13 +108,12 @@ And in combination with storybook, we can have all popular use cases available t
     - I wanted to present the clean and simple architecture,
     - it requires that we have an abstract "client" interface that is promise-based
 
-
 ## What's not included
 
 - Pagination is not implemented, it loads first 50 records.
   - my existing virtual scroll with data fetching [example](https://adamborowski.github.io/imdb-hooks) (search for "spider" and scroll) with [source](https://github.com/adamborowski/imdb-hooks/tree/master/src/aspects/list)
 - Not doing browser checking, prepared for newest Google Chrome
 - Routing - would use react-router but this time it would be small ROI for one page
-
+- also didn't integrate with popular solutions like depcheck or syncpack or snyk
 
 Project generated using [Create React App](https://create-react-app.dev/),
