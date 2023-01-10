@@ -1,9 +1,9 @@
-import { useSearchRepositoriesClient } from "../../services/useSearchRepositoriesClient";
 import { FC, useEffect, useState } from "react";
 import { PromiseState } from "../../../../common/state/usePromiseState";
 import { Repository } from "../../types";
 import { repositorySearchClient } from "./repositorySearchClient";
 import { ComponentStory } from "@storybook/react";
+import { useSearchClient } from "../../../../common/services/useSearchClient";
 
 export default {
   parameters: {
@@ -15,11 +15,7 @@ const Template: ComponentStory<FC<{ query: string }>> = ({ query }) => {
   const [state, setState] = useState<PromiseState<Repository[]>>({
     type: "pending",
   });
-  const { search } = useSearchRepositoriesClient(
-    state,
-    setState,
-    repositorySearchClient
-  );
+  const { search } = useSearchClient(state, setState, repositorySearchClient);
 
   useEffect(() => {
     void search(query);
