@@ -26,9 +26,9 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
   const { formatMessage } = useIntl();
 
   return (
-    <Card {...rest} data-testid="repository-card">
+    <Card {...rest} data-testid="repository-card" data-chromatic="ignore">
       <CardBody>
-        <Stack mt="6" spacing="3" data-chromatic="ignore">
+        <Stack mt="6" spacing="3" >
           <Heading size="md">
             {repository.owner} &raquo; {repository.name}
           </Heading>
