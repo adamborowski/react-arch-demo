@@ -5,7 +5,6 @@ import userEvent from "@testing-library/user-event";
 import { withFailure } from "../../../../common/api/clients/development/withFailure";
 
 describe("RepositorySearchPage.connected", () => {
-
   it("should allow to search with query and re-search after changing the query", async () => {
     render(
       <RepositorySearchPageConnected searchClient={inMemorySearchClient} />,
@@ -97,10 +96,10 @@ describe("RepositorySearchPage.connected", () => {
     act(() => void userEvent.click(screen.getByText("Search")));
 
     expect(
-      (searchClient.search.mock.calls[0][1] as AbortController).signal.aborted
+      (searchClient.search.mock.calls[0][1] as AbortSignal).aborted
     ).toBeTruthy();
     expect(
-      (searchClient.search.mock.calls[1][1] as AbortController).signal.aborted
+      (searchClient.search.mock.calls[1][1] as AbortSignal).aborted
     ).toBeFalsy();
   });
 });
