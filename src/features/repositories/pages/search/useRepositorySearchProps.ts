@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
-import { PromiseState } from "../../../../common/state/usePromiseState";
+import { useCallback, useState } from "react";
 import { Repository } from "../../types";
 import { SearchClient } from "../../../../common/api/clients/SearchClient";
-import { useSearchClient } from "../../../../common/services/useSearchClient";
+import { useQuery } from "../../../../common/services/useQuery";
 
 export const useRepositorySearchProps = (
   searchClient: SearchClient<Repository>
 ) => {
   const [query, setQuery] = useState("react");
-  const [repositories, setRepositories] = useState<PromiseState<Repository[]>>({
-    type: "pending",
-  });
 
-  const searchRepositories = useSearchClient(
-    repositories,
-    setRepositories,
-    searchClient
+  const getData = useCallback(
+    (signal: AbortSignal) => searchClient.search(query, signal),
+    [query, searchClient]
   );
 
-  useEffect(() => {
-    void searchRepositories.search(query);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const repositories = useQuery(getData);
+
+  const onQueryChange = useCallback(
+    (newQuery: string) => {
+      if (query === newQuery) {
+        void repositories.reload();
+      } else {
+        setQuery(newQuery);
+      }
+    },
+    [query, repositories]
+  );
 
   return {
     query,
-    repositories,
-    onQueryChange: (query: string) => {
-      setQuery(query);
-      void searchRepositories.search(query);
-    },
+    repositories: repositories.state,
+    onQueryChange,
   };
 };
