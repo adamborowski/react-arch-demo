@@ -1,6 +1,6 @@
 import React, { FormEvent, memo, useEffect, useRef, useState } from "react";
 import { Button, Flex, Input, useColorModeValue } from "@chakra-ui/react";
-import { PromiseStateType } from "../../../common/state/usePromiseState";
+import { PromiseStateType } from "../../../common/utils/PromiseState";
 import { FormattedMessage } from "react-intl";
 import { messages } from "../../../i18n/messages";
 

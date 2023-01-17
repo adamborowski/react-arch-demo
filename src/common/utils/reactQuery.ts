@@ -1,4 +1,4 @@
-import { PromiseState } from "../state/usePromiseState";
+import { PromiseState } from "./PromiseState";
 
 export const getPromiseStateFromQueryState = <T>(
   status: "idle" | "error" | "loading" | "success",

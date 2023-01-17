@@ -1,7 +1,7 @@
-import { Adapter } from "../../../../common/api/clients/Adapter";
+import { Adapter } from "../../../common/api/Adapter";
 import z from "zod";
-import { Repository, repositorySchema } from "../../types";
-import { flattenZodError } from "../../../../common/services/flattenZodError";
+import { Repository, repositorySchema } from "../types";
+import { flattenZodError } from "../../../common/utils/flattenZodError";
 
 const searchRepositorySchema = z.object({
   databaseId: z.number(),

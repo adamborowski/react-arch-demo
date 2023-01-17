@@ -3,7 +3,7 @@ import "./App.css";
 import { AppLayout } from "./features/repositories/components/AppLayout";
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import { IntlProvider } from "react-intl";
-import { RepositorySearchPageSimple } from "./features/repositories/pages/search/RepositorySearchPage.simple";
+import { RepositorySearchPageConnected } from "./features/repositories/pages/search/RepositorySearchPage.connected";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient({
@@ -32,7 +32,7 @@ function App() {
         <ChakraProvider>
           <ColorModeProvider>
             <AppLayout>
-              <RepositorySearchPageSimple />
+              <RepositorySearchPageConnected />
             </AppLayout>
           </ColorModeProvider>
         </ChakraProvider>

@@ -1,4 +1,4 @@
-import { PromiseState } from "../../../../common/state/usePromiseState";
+import { PromiseState } from "../../../../common/utils/PromiseState";
 import { Repository } from "../../types";
 import React, { FC } from "react";
 import { RepositorySearchPageLayout } from "./RepositorySearchPage.layout";

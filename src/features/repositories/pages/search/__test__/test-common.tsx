@@ -1,6 +1,5 @@
-import { createInMemorySearchClient } from "../../../../../common/api/clients/development/inMemorySearchClient";
-import { Repository } from "../../../types";
 import { IntlProvider } from "react-intl";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export const testCommon = [
   {
@@ -41,11 +40,19 @@ export const testCommon = [
   },
 ];
 
-export const inMemorySearchClient = createInMemorySearchClient<Repository>(
-  testCommon,
-  (query, item) => item.name.toLowerCase().includes(query.trim().toLowerCase())
-);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // ✅ turns retries off
+      retry: false,
+    },
+  },
+});
 
 export const renderOptions = {
-  wrapper: (props: {}) => <IntlProvider locale="en" {...props} />,
+  wrapper: (props: {}) => (
+    <QueryClientProvider client={queryClient}>
+      <IntlProvider locale="en" {...props} />
+    </QueryClientProvider>
+  ),
 };
