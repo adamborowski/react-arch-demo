@@ -1,6 +1,7 @@
 import { Adapter } from "../../../../common/api/clients/Adapter";
 import z from "zod";
 import { Repository, repositorySchema } from "../../types";
+import { flattenZodError } from "../../../../common/services/flattenZodError";
 
 const searchRepositorySchema = z.object({
   databaseId: z.number(),
@@ -24,7 +25,7 @@ export const repositoryAdapter: Adapter<
   z.infer<typeof searchPayloadSchema>,
   Repository
 > = {
-  parse: searchPayloadSchema.parse,
+  parse: flattenZodError(searchPayloadSchema.parse),
   serverToClient: (serverResponse) =>
     serverResponse.data.search.nodes.map(
       ({
@@ -36,7 +37,7 @@ export const repositoryAdapter: Adapter<
         owner,
         description,
       }) =>
-        repositorySchema.parse({
+        flattenZodError(repositorySchema.parse)({
           id: databaseId,
           name,
           owner: owner.login,
