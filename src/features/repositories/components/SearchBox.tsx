@@ -57,7 +57,7 @@ export const SearchBox = memo<SearchBoxProps>(
             type="submit"
             variant="solid"
             colorScheme="blue"
-            disabled={!isSearchAvailable}
+            isDisabled={!isSearchAvailable}
           >
             <FormattedMessage {...messages.searchButtonLabel} />
           </Button>
