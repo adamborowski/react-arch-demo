@@ -3,12 +3,16 @@
 ## Requirements
 
 * search GitHub repositories using GraphQL API
+* show loading and error states
+* pay attention to UX, ie. Search enabled only if the request would result in changes
 * be able to easily integrate with Fetch API
 * support multiple backend schemas (ie. legacy backend schema and modern schema)
 * easy testability in unit testing and Storybook environments, without a need of mocking mechanisms
 * easy exploration of various use cases exposed by easily accessible Storybook stories
 * full typescript and runtime type safety
 * demonstrate *imperative shell, functional core* architecture (details below)
+
+For comparison, simpler version is available [here](https://github.com/adamborowski/react-arch-demo/tree/minimalistic-version)
 
 ## Verifications
 
