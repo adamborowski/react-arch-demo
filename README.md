@@ -1,5 +1,15 @@
 # Listing Repositories
 
+## Requirements
+
+* search GitHub repositories using GraphQL API
+* be able to easily integrate with Fetch API
+* support multiple backend schemas (ie. legacy backend schema and modern schema)
+* easy testability in unit testing and Storybook environments, without a need of mocking mechanisms
+* easy exploration of various use cases exposed by easily accessible Storybook stories
+* full typescript and runtime type safety
+* demonstrate *imperative shell, functional core* architecture (details below)
+
 ## Verifications
 
 ### Local development.
