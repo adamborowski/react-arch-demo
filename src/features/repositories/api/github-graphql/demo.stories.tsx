@@ -1,9 +1,7 @@
-import { FC, useEffect, useState } from "react";
-import { PromiseState } from "../../../../common/state/usePromiseState";
-import { Repository } from "../../types";
+import { FC, useCallback } from "react";
 import { repositorySearchClient } from "./repositorySearchClient";
 import { ComponentStory } from "@storybook/react";
-import { useSearchClient } from "../../../../common/services/useSearchClient";
+import { useQuery } from "../../../../common/services/useQuery";
 
 export default {
   parameters: {
@@ -12,14 +10,11 @@ export default {
 };
 
 const Template: ComponentStory<FC<{ query: string }>> = ({ query }) => {
-  const [state, setState] = useState<PromiseState<Repository[]>>({
-    type: "pending",
-  });
-  const { search } = useSearchClient(state, setState, repositorySearchClient);
-
-  useEffect(() => {
-    void search(query);
-  }, [query, search]);
+  const getData = useCallback(
+    (signal: AbortSignal) => repositorySearchClient.search(query, signal),
+    [query]
+  );
+  const { state } = useQuery(getData);
 
   return (
     <div>

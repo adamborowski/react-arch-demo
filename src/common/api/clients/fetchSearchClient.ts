@@ -8,14 +8,14 @@ export const createFetchSearchClient = <ServerType, ClientType>(
   adapter: Adapter<ServerType, ClientType>,
   fetchImpl: typeof fetch = fetch
 ): SearchClient<ClientType> => ({
-  search: async (query, abortController) => {
+  search: async (query, signal) => {
     const response = await fetchImpl(urlFactory(query), {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
-      signal: abortController?.signal,
+      signal,
     });
     const json = await response.json();
 

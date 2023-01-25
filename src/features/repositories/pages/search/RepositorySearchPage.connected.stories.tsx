@@ -28,10 +28,8 @@ export const ClientInMemoryMock: ComponentStory<
 ClientInMemoryMock.play = async ({ canvasElement }) => {
   expect(screen.getByTestId("spinner")).toBeVisible();
   await waitFor(
-      async () => {
-        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
-      },
-      { timeout: 10000 }
+    () => expect(screen.queryByTestId("spinner")).not.toBeInTheDocument(),
+    { timeout: 10000 }
   );
   expect(screen.getAllByTestId("repository-card")).toHaveLength(4);
 
@@ -42,14 +40,14 @@ ClientInMemoryMock.play = async ({ canvasElement }) => {
   await userEvent.click(screen.getByText("Search"));
 
   // now search button should be disabled and we should wait for results
-  expect(screen.getByText("Search")).toBeDisabled();
-  expect(screen.getByTestId("spinner")).toBeVisible();
+  await waitFor(async () => {
+    expect(screen.getByText("Search")).toBeDisabled();
+    expect(screen.getByTestId("spinner")).toBeVisible();
+  });
 
   await waitFor(
-      async () => {
-        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
-      },
-      { timeout: 10000 }
+    () => expect(screen.queryByTestId("spinner")).not.toBeInTheDocument(),
+    { timeout: 10000 }
   );
 
   // we should see only two repositories in results
@@ -63,20 +61,24 @@ ClientInMemoryMock.play = async ({ canvasElement }) => {
   await delay(300);
   await userEvent.click(screen.getByText("Search"));
 
+  // now search button should be disabled and we should wait for results
+  await waitFor(async () => {
+    expect(screen.getByText("Search")).toBeDisabled();
+    expect(screen.getByTestId("spinner")).toBeVisible();
+  });
+
   await waitFor(
-      async () => {
-        await expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
-      },
-      { timeout: 10000 }
+    () => expect(screen.queryByTestId("spinner")).not.toBeInTheDocument(),
+    { timeout: 10000 }
   );
 
   expect(screen.queryAllByTestId("repository-card")).toHaveLength(0);
   expect(screen.getByText("No repositories found")).toBeVisible();
 };
 
-
-export const ClientRest: ComponentStory<typeof RepositorySearchPageConnected> =
-  () => <RepositorySearchPageConnected searchClient={restClient} />;
+export const ClientRest: ComponentStory<
+  typeof RepositorySearchPageConnected
+> = () => <RepositorySearchPageConnected searchClient={restClient} />;
 
 export const ClientGraphql: ComponentStory<
   typeof RepositorySearchPageConnected

@@ -12,7 +12,7 @@ export const createGraphqlSearchClient = <ServerType, ClientType>(
   token: string,
   adapter: Adapter<ServerType, ClientType>
 ): SearchClient<ClientType> => ({
-  search: async (query, abortController) => {
+  search: async (query, signal) => {
     const gql = {
       // TODO inject specific query from external
       query: `query ($query: String!) {
@@ -45,7 +45,7 @@ export const createGraphqlSearchClient = <ServerType, ClientType>(
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
-      signal: abortController?.signal,
+      signal,
       body: JSON.stringify(gql),
     });
     const json = await response.json();
