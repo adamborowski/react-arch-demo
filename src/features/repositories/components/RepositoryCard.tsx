@@ -57,7 +57,7 @@ export const RepositoryCard: FC<RepositoryCardProps> = ({
             colorScheme="blue"
             href={repository.linkUrl}
             target="_blank"
-          >
+          >$$$$
             <FormattedMessage {...messages.viewInGithub} />
           </Button>
         </ButtonGroup>
