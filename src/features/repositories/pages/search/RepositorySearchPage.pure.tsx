@@ -40,7 +40,7 @@ export const RepositorySearchPagePure: FC<RepositorySearchPagePureProps> = ({
     {repositories.type === "error" && (
       <Alert status="error">
         <AlertIcon />
-        There was an error processing your request: {repositories.message}
+        There was some error processing your request: {repositories.message}
       </Alert>
     )}
     {repositories.type === "loaded" &&
