@@ -17,6 +17,7 @@ export const AppLayout: FC<PropsWithChildren> = ({ children, ...rest }) => (
       </Heading>
       <ColorModeChange />
     </Flex>
+    Balbabla
     {children}
   </Stack>
 );
